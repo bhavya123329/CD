@@ -1,3 +1,4 @@
+
 name: C CI/CD
 
 on:
@@ -7,7 +8,8 @@ on:
   pull_request:
     branches:
       - main
-  jobs:
+
+jobs:
   build:
     runs-on: ubuntu-latest
 
@@ -24,4 +26,11 @@ on:
       - name: Run
         run: ./main
 
-  
+  deploy-staging:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+    steps:
+      - name: Simulate deployment
+        run: echo "Simulating deployment to staging..."
